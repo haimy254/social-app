@@ -1,6 +1,18 @@
 {% extends 'base.html'%} {% block content %}
+
 <form action="" method="POST">
-{% csrf_token %}
-<p>working</p>
+{% csrf_token%}
+    <div class="form-group">
+        <label for="text">username</label>
+        <input type="email" class="form-control" id="username" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label class="form-check-label"><input type="checkbox"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
 {% endblock%}
