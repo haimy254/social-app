@@ -29,9 +29,13 @@ def login(request):
             login(request, user)
             return redirect ('home.html')
         else:
-            messages.info('request',"The username or password is incorrect")
+            messages.info(request,"The username or password is incorrect")
     return render (request,'authenticate/login.html')
-    
+ 
+def logoutUser(request):
+    logout(request)
+    return redirect('authenticate/login.html')  
+        
 
 def home(request):
     return render (request,'home')
