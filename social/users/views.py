@@ -5,6 +5,8 @@ from django.contrib import messages
 from .forms import CreateUserForm
 
 from django.contrib.auth.decorators import login_required
+from .forms import *
+from .models import Profile
 
 # Create your views here.
 def registerPage(request):
@@ -39,5 +41,19 @@ def logoutUser(request):
     return redirect('authenticate/login.html')  
         
 @login_required(login_url='authenticate/login.html')
+
+
 def home(request):
     return render (request,'home')
+
+
+def profile(request):
+    if request.method == 'POST':
+        form = Profile(request.POST,request.FILES)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = profile()
+        return render (request,'profileform.html', {'form' : form})
