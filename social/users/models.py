@@ -13,3 +13,10 @@ class Comments(models.Model):
     
     def save_comment(self):
         self.save
+        
+class Image(models.Model):
+    image = models.ImageField(upload_to = 'image')
+    image_name= models.CharField(max_length=100)
+    image_caption = models.CharField()
+    profile = models.ForeignKey(Profile,on_delete= models.CASCADE)
+    
