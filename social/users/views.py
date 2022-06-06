@@ -57,3 +57,6 @@ def profile(request):
     else:
         form = profile()
         return render (request,'profileform.html', {'form' : form})
+    
+def home_view(request):
+    return render(request,'home.html')
