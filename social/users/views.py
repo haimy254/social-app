@@ -60,3 +60,9 @@ def profile(request):
     
 def home_view(request):
     return render(request,'home.html')
+
+def display_images(request):
+    if request.method=="GET":
+        images=Image.objects.all();
+        absolute_url=request.build_absolute_uri()
+        return render(request,'show_images.html',{'all_images':images,"root_url":absolute_url})
