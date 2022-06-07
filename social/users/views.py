@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
@@ -16,47 +17,46 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for' + user)
-            return redirect('authenticate/login.html')
+           
+            return redirect('home')
         
         
     context = {'form': form}
-    return render(request,'authenticate/register.html', context)
+    return render(request,'register.html', context)
         
-def login(request):
+def login_user(request):
+    form = Loginform()
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect ('home.html')
-        else:
-            messages.info(request,"The username or password is incorrect")
-    return render (request,'authenticate/login.html')
+        form = Loginform(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request,user)
+    
+    context={'form':form}
+    return render (request,'home.html', context)
  
 def logoutUser(request):
     logout(request)
-    return redirect('authenticate/login.html')  
+    return redirect('login.html')  
+
         
-@login_required(login_url='authenticate/login.html')
-
-
+@login_required(login_url='login.html')
 def home(request):
     return render (request,'home')
 
 
 def profile(request):
     if request.method == 'POST':
-        form = Profile(request.POST,request.FILES)
+        form = ProfileForm(request.POST,request.FILES)
         
         if form.is_valid():
             form.save()
             return redirect('home')
-    else:
-        form = profile()
-        return render (request,'profileform.html', {'form' : form})
+    context = {'form':form}
+    return render (request,'profileform.html', context)
     
 def home_view(request):
     return render(request,'home.html')

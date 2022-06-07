@@ -10,11 +10,15 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         
+class Loginform(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(max_length=20, widget=forms.PasswordInput)
+        
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_photo','bio']
-        templates = ()
+        templates = ('profileform.html')
         
 class ImageForm(forms.ModelForm):
     
