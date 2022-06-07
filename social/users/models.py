@@ -26,3 +26,8 @@ class Image(models.Model):
     comment = models.ForeignKey(Comments,on_delete= models.CASCADE )
     likes = models.ManyToManyField(User, related_name='like_image')
     
+    
+    @classmethod
+    def get_images(cls):
+        images=cls.objects.all()
+        return images

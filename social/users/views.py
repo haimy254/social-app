@@ -55,8 +55,8 @@ def profile(request):
         if form.is_valid():
             form.save()
             return redirect('home')
-    context = {'form':form}
-    return render (request,'profileform.html', context)
+    # context = {'form':form}
+    return render (request,'profileform.html')
     
 def home_view(request):
     return render(request,'home.html')
@@ -89,7 +89,7 @@ def image_view(request):
   
   
 def success(request):
-    return HttpResponse('successfully uploaded')
+    return HttpResponse(request,'successfully uploaded')
 
 @csrf_exempt
 def search(request):   
