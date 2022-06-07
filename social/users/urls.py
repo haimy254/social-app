@@ -11,6 +11,8 @@ urlpatterns = [
     path('logout/',logoutUser,name="logout"),
     path('profile/',profile,name="profile"),
     path('show_images/',display_images,name='all_images'),
+    path("search/",search, name="search"),
+     path('success', success, name = 'success'),
 ]
 
 

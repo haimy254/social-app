@@ -1,8 +1,20 @@
 {%extends 'base.html'%} {% block content %}
 
-    <form method = "post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
-    </form>
-    {% endblock %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="formFileMultiple" class="form-label"
+    >Multiple files input example</label
+  >
+  <input class="form-control" type="file" id="formFileMultiple" multiple />
+  <div class="form-group">
+    <label for="exampleFormControlInput1">BIO</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+      placeholder="bio"
+    />
+  </div>
+  <button type="submit">Upload</button>
+</form>
+{% endblock %}

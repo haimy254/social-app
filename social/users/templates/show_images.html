@@ -1,12 +1,81 @@
 {%extends 'base.html'%} {% block content %}
-<div class="bg">
-  <div class="container">
-    <div class="jumbotron">
-      <p>Welcome to social</p>
-      {% comment %} {%if all_images%}
-      <div class="row">
-      {% for images in all_imags%} {% endcomment %}
+
+<div class="p-3" >
+  <form action="{% url 'search'%}" method="POST">
+    <div class="input-group">
+      <div class="form-outline">
+        <input
+          id="search-focus"
+          type="search"
+          id="form1"
+          name="category"
+          class="form-control"
+          placeholder="search..."
+          style="border-radius: 0"
+        />
+        <label class="form-label" for="form1" placeholder="search image by name...."></label>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary btn-sm"
+        style="max-height: 37px; border-radius: 0"
+      >
+        <i class="fas fa-search"></i>
+      </button>
     </div>
+  </form>
+  <h1 class="all">All images</h1>
+
+  {%if all_images%}
+  <div class="row">
+    {%for image in all_images%}
+    <div class="image-details-overlay hide" id="image-details-overlay">
+      <p id="close-btn">&#215;</p>
+      <div class="image-details">
+        <img src="" alt="" id="image-details-img" style="max-width: 600px" />
+        <h4 id="image-details-name"></h4>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 my-3">
+      <div class="card image-card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="{{image.images.url}}"
+          alt="Card image cap"
+          style="cursor: pointer; max-height: 170px; min-height: 170px"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{image.image_name}}</h5>
+          <p class="card-text" style="max-height: 60px; min-height: 60px">
+            {{image.image_caption}}
+            <span id="card-subtext"></span>
+          </p>
+          <hr />
+          <div>
+            <a href="#" class="copy-target"
+              >http:127.0.0.1:8000/{% url 'home'%}details/pics/{{image.id}}</a
+            ><span class="btn btn-outline-primary btn-sm m-3 copy-btn"
+              >copy link</span
+            >
+          </div>
+          <hr />
+          <a
+            href="{% url 'home'%}get_update/{{image.id}}"
+            class="btn btn-primary"
+            >update</a
+          >
+          <a
+            href="{% url 'home'%}delete_image/{{image.id}}"
+            class="btn btn-danger"
+            >delete</a
+          >
+        </div>
+      </div>
+    </div>
+    {%endfor%}
   </div>
+
+  {%else%}
+  <h3 class="text-warning m-3">No Images found</h3>
 </div>
-{% endblock %}
+{%endif%} {%endblock%}
