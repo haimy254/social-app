@@ -1,6 +1,19 @@
 {%extends 'base.html'%} {% block content %}
 <div class="container">
-<div class="jumbotron">
-
-</div></div>
+  <div class="jumbotron">
+  <h1>profile</h1>
+    {% comment %} {% for profile in profiles%} {% endcomment %}
+    <div class="col-md-4">
+      <img
+        src="{{ profile.profile_photo.url }}"
+        class="img-responsive"
+        style="width: 100%; float: left; margin-right: 10px"
+      />
+      {{ profile.bio }}
+    </div>
+  
+    {% comment %} {%endfor%} {% endcomment %}
+      <a href="profileform.html" class="link-primary">create a profile</a>
+  </div>
+</div>
 {% endblock %}

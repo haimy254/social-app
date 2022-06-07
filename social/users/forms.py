@@ -14,7 +14,7 @@ class Loginform(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(max_length=20, widget=forms.PasswordInput)
         
-class ProfileForm(forms.ModelForm):
+class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_photo','bio']
@@ -25,3 +25,9 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['images','image_name','image_caption']
+        
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = ['username','email']

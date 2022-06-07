@@ -1,6 +1,6 @@
 {%extends 'base.html'%} {% block content %}
 
-<div class="p-3" >
+<div class="p-3">
   <form action="{% url 'search'%}" method="POST">
     <div class="input-group">
       <div class="form-outline">
@@ -13,7 +13,11 @@
           placeholder="search..."
           style="border-radius: 0"
         />
-        <label class="form-label" for="form1" placeholder="search image by name...."></label>
+        <label
+          class="form-label"
+          for="form1"
+          placeholder="search image by name...."
+        ></label>
       </div>
       <button
         type="submit"
@@ -26,7 +30,7 @@
   </form>
   <h1 class="all">All images</h1>
 
-  {%if all_images%}
+  {% comment %} {%if all_images%}
   <div class="row">
     {%for image in all_images%}
     <div class="image-details-overlay hide" id="image-details-overlay">
@@ -53,7 +57,8 @@
           <hr />
           <div>
             <a href="#" class="copy-target"
-              >http:127.0.0.1:8000/{% url 'home'%}details/pics/{{users_image.id}}</a
+              >http:127.0.0.1:8000/{% url
+              'home'%}details/pics/{{users_image.id}}</a
             ><span class="btn btn-outline-primary btn-sm m-3 copy-btn"
               >copy link</span
             >
@@ -72,10 +77,11 @@
         </div>
       </div>
     </div>
-    {%endfor%}
-  </div>
+    {%endfor%} {% endcomment %}
+  {% comment %} </div>
 
   {%else%}
   <h3 class="text-warning m-3">No Images found</h3>
 </div>
-{%endif%} {%endblock%}
+{%endif%}  {% endcomment %}
+{%endblock%}
