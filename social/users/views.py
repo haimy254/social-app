@@ -18,12 +18,13 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-           
-            return redirect('home')
+            user = form.cleaned_data.get('username')
+            messages.success(request,'account was created for'+ user)
+            return redirect('login')
         
         
     context = {'form': form}
-    return render(request,'register.html', context)
+    return render(request,'accounts/register.html', context)
         
 def login(request):
     form = Loginform()
@@ -47,7 +48,7 @@ def logout(request):
     return redirect(request,'login.html')  
 
         
-@login_required(login_url='login.html')
+@login_required(login_url='account/login.html')
 def home(request):
     return render (request,'home')
 
@@ -72,34 +73,34 @@ def profile(request):
 def home_view(request):
     return render(request,'home.html')
 
-# def profile_view(request):
-#     if request.method=="GET":
-#         profile=Profile.objects.filter();
+def profile_view(request):
+    if request.method=="GET":
+        profile=Profile.objects.filter();
       
-#         return render(request,'profile.html',{'proifle':profile})
+        return render(request,'profile.html',{'proifle':profile})
     
-@login_required(login_url='login.html')
+@login_required(login_url='account/login.html')
 def display_images(request):
     if request.method=="GET":
         Images=Image.objects.all();
         absolute_url=request.build_absolute_uri()
       
         return render(request,'show_images.html',{'all_images':Images,"root_url":absolute_url})
-def success(request):
-    return HttpResponse(request,'successfully uploaded')  
-    
+ 
+@login_required(login_url='account/login.html')   
 def image_view(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
   
         if form.is_valid():
             form.save()
-            return redirect('success')
+            return redirect('home')
     else:
         form = ImageForm()
     return render(request, 'imageform.html', {'form' : form})
   
-  
+def success(request):
+    return HttpResponse(request,'successfully uploaded')  
 
 
 @csrf_exempt

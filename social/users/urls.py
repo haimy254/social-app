@@ -10,9 +10,10 @@ urlpatterns = [
     path('logout/', logout, name ='logout'),
     path('login/',login,name="login"),
     path('imageform/',image_view,name="imageform"),
-    path('profile/',profile,name="profile"),
+    path('profile/',profile_view,name="profile"),
     path('show_images/',display_images,name='all_images'),
     path("search/",search, name="search"),
+    path('profileform/',profile,name="profilefrom"),
     path('success', success, name = 'success'),
     path('delete_image/<int:image_id>',delete_image,name='delete_image'),
 ]

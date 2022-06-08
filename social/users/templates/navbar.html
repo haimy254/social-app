@@ -18,7 +18,10 @@
       >
       <a class="nav-item nav-link" href="{% url 'all_images'%}">All Images</a>
       <a class="nav-item nav-link" href="{% url 'register'%}">REGESTRATION</a>
+      <a class="nav-item nav-link" href="{% url 'profile'%}"> VIEW PROFILE</a>
     </div>
-    
+     {% if user.is_authenticated %}
+      <a href="#">Hi {{user.username}}</a>
+       {% endif %}
   </div>
 </nav>
