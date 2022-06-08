@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'social.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'social',
-         'USER': 'haimy',
-        'PASSWORD': 'haimy3',
-        'HOST' : 'localhost',
+        'NAME': 'deq8q8h64937p',
+         'USER': 'fyyesflcxpcsul',
+        'PASSWORD': 'ea76cfaf9d16380cb6cbbb1bc77a05b580ba7a57facc2be7e7919a4edb4003eb',
+        'HOST' : 'ec2-52-204-195-41.compute-1.amazonaws.com',
     }
 }
 
