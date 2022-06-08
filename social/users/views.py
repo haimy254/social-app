@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
@@ -37,22 +38,23 @@ def login(request):
             if user is not None:
                 form = login(request, user)
                 messages.success(request, f' wecome {username} !!')
-                return redirect('register')
+                return redirect('accounts/register.html')
             else:
                 messages.info(request, f'account done not exit plz sign in')
     form = AuthenticationForm()
     return render (request,'home.html',{'form':form})
  
-def logout(request):
-    
-    return redirect(request,'login.html')  
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('home'))  
 
         
-@login_required(login_url='account/login.html')
+@login_required(login_url='accounts/login')
 def home(request):
     return render (request,'home')
 
-@login_required(login_url='login.html')
+@login_required(login_url='accounts/login')
 def profile(request):
     if request.method == 'POST':
         u_form= UserUpdateForm(request.POST, instance=request.user)
@@ -79,7 +81,7 @@ def profile_view(request):
       
         return render(request,'profile.html',{'proifle':profile})
     
-@login_required(login_url='account/login.html')
+@login_required(login_url='accounts/login')
 def display_images(request):
     if request.method=="GET":
         Images=Image.objects.all();
@@ -87,7 +89,7 @@ def display_images(request):
       
         return render(request,'show_images.html',{'all_images':Images,"root_url":absolute_url})
  
-@login_required(login_url='account/login.html')   
+@login_required(login_url='accounts/login.html')   
 def image_view(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
@@ -125,6 +127,7 @@ def search(request):
         message = "You haven't searched for any image"
         return render(request, 'search.html',{"message":message})
     
+@login_required(login_url='accounts/login')    
 def delete_image(request,image_id):
     the_id=int(image_id)
     images=0

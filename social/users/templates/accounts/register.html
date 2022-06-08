@@ -41,12 +41,13 @@
                   <button type="submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
-{{form.errors}}
+
 
               </form>
+              {{form.errors}}
 
-                {% comment %} <p class="text-center text-muted mt-5 mb-0">Have already an account?</p>
-                <a href="{% url 'login'%}">login</a> {% endcomment %}
+              <p class="text-center text-muted mt-5 mb-0">Have already an account?</p>
+                <a href="{% url 'login'%}">login</a> 
 
             </div>
           </div>
