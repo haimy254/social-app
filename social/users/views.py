@@ -12,7 +12,7 @@ from .forms import *
 from .models import Profile
 
 # Create your views here.
-def registerPage(request):
+def registerPage(request): 
     form = CreateUserForm()
     
     if request.method == "POST":
@@ -34,11 +34,12 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password) or request.user
+            
             if user is not None:
                 form = login(request, user)
-                messages.success(request, f' wecome {username} !!')
-                return redirect('accounts/register.html')
+                messages.success(request, f' welcome {username} !!')
+                return redirect('home')
             else:
                 messages.info(request, f'account done not exit plz sign in')
     form = AuthenticationForm()
@@ -78,8 +79,9 @@ def home_view(request):
 def profile_view(request):
     if request.method=="GET":
         profile=Profile.objects.filter();
+       
       
-        return render(request,'profile.html',{'proifle':profile})
+    return render(request,'profile.html',{'profile':profile,})
     
 @login_required(login_url='accounts/login')
 def display_images(request):
@@ -140,3 +142,5 @@ def delete_image(request,image_id):
     except:
         images=Image.objects.all()
         return render(request,'show_images.html',{'all_images':images})
+    
+   
