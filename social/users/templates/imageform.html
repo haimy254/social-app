@@ -1,25 +1,19 @@
 {%extends 'base.html'%} {% block content %}
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %} 
-  <label for="formFileMultiple" class="form-label"
-    >Multiple files input example</label
-  >
-  <input class="form-control" type="file"  multiple />
-   <div class="form-group">
-    <label for="">Name</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="name"
-    />
-  </div> <div class="form-group">
-    <label for="">caption</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="caption"
-    />
-  </div>
-  <button type="submit">Upload</button>
-</form>
- {% endblock %}
+<div class="container">
+<div class="jumbotron">
+<center>
+<h1>Add IMAGE</h1>
+<br/><br/>
+{% if submitted %}
+your image is submitted Successfully
+{% else %}
+   <form method = "post" enctype="multipart/form-data" class="bg-light">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+{%endif%}
+</center>
+</div>
+</div>
+{% endblock %}

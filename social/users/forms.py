@@ -20,11 +20,14 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['profile_photo','bio']
         templates = ('profileform.html')
         
-class ImageForm(forms.ModelForm):
-    
+class ImageForm(ModelForm):
     class Meta:
         model = Image
         fields = ['images','image_name','image_caption']
+        widgets = {
+            'tags': forms.CheckboxSelectMultiple(),
+        }
+     
         
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()

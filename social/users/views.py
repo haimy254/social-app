@@ -1,10 +1,10 @@
-from stringprep import in_table_c11_c12
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from django.conf import settings
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
 from .forms import CreateUserForm
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -25,7 +25,7 @@ def registerPage(request):
     context = {'form': form}
     return render(request,'register.html', context)
         
-def login_user(request):
+def login(request):
     form = Loginform()
     if request.method == "POST":
         form = Loginform(request.POST)
@@ -34,21 +34,24 @@ def login_user(request):
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request,user)
-    
-    context={'form':form}
-    return render (request,'home.html', context)
+                form = login(request, user)
+                messages.success(request, f' wecome {username} !!')
+                return redirect('register')
+            else:
+                messages.info(request, f'account done not exit plz sign in')
+    form = AuthenticationForm()
+    return render (request,'home.html',{'form':form})
  
-def logoutUser(request):
-    logout(request)
-    return redirect('login.html')  
+def logout(request):
+    
+    return redirect(request,'login.html')  
 
         
 @login_required(login_url='login.html')
 def home(request):
     return render (request,'home')
 
-
+@login_required(login_url='login.html')
 def profile(request):
     if request.method == 'POST':
         u_form= UserUpdateForm(request.POST, instance=request.user)
@@ -57,7 +60,7 @@ def profile(request):
         if u_form.is_valid()and p_form.is_valid():
             u_form.save()
             p_form.save()
-            return redirect('home')
+            return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -75,29 +78,29 @@ def home_view(request):
       
 #         return render(request,'profile.html',{'proifle':profile})
     
-
+@login_required(login_url='login.html')
 def display_images(request):
     if request.method=="GET":
         Images=Image.objects.all();
+        absolute_url=request.build_absolute_uri()
       
-        return render(request,'show_images.html',{'all_images':Images})
-    
+        return render(request,'show_images.html',{'all_images':Images,"root_url":absolute_url})
+def success(request):
+    return HttpResponse(request,'successfully uploaded')  
     
 def image_view(request):
-  
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
   
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('success')
     else:
         form = ImageForm()
     return render(request, 'imageform.html', {'form' : form})
   
   
-def success(request):
-    return HttpResponse(request,'successfully uploaded')
+
 
 @csrf_exempt
 def search(request):   
@@ -120,3 +123,16 @@ def search(request):
     else:
         message = "You haven't searched for any image"
         return render(request, 'search.html',{"message":message})
+    
+def delete_image(request,image_id):
+    the_id=int(image_id)
+    images=0
+
+    try:
+        image_sel=Image.objects.get(id=the_id)
+        image_sel.delete()
+        images=Image.objects.all()
+        return render(request,'show_images.html',{'all_images':images})
+    except:
+        images=Image.objects.all()
+        return render(request,'show_images.html',{'all_images':images})
