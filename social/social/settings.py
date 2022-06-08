@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2rf(v^rrjc2w+vwx^^%42a&&2xl=1rmh4p0ed4^508c=^zxv8h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['qare-socialapp','127.0.0.1']
+ALLOWED_HOSTS = ['qare-socialapp.herokuapp.com','127.0.0.1']
 
 
 # Application definition
