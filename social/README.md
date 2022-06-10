@@ -1,4 +1,7 @@
 ## AUTHOR 
+* HAIMANA QARE UTA
+## EMAIL ACCOUNT 
+* haimanaare@gmail.com
 
 ## SOCIAL APP
 
@@ -6,7 +9,17 @@
 
 ### About App
 
-<p>This</p>
+<p>This is a website that allows users to login, see thier profile and add images. </p>
+---
+
+
+### LANGUAGES USED 
+
+* HTML
+* DJANGO version 4.0.5
+* CSS
+
+
 
 ### Installation and running
 
