@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
-from .forms import CreateUserForm
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
@@ -12,38 +11,37 @@ from .forms import *
 from .models import Profile
 
 # Create your views here.
-def registerPage(request): 
-    form = CreateUserForm()
-    
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request,'account was created for'+ user)
-            return redirect('login')
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("home")
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = NewUserForm()
+	return render (request=request, template_name="home.html", context={"register_form":form})
+
+
         
-        
-    context = {'form': form}
-    return render(request,'accounts/register.html', context)
-        
-def login(request):
-    form = Loginform()
-    if request.method == "POST":
-        form = Loginform(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password) or request.user
-            
-            if user is not None:
-                form = login(request, user)
-                messages.success(request, f' welcome {username} !!')
-                return redirect('home')
-            else:
-                messages.info(request, f'account done not exit plz sign in')
-    form = AuthenticationForm()
-    return render (request,'home.html',{'form':form})
+def login_request(request):
+	if request.method == "POST":
+		form = AuthenticationForm(request, data=request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			password = form.cleaned_data.get('password')
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				login(request, user)
+				messages.info(request, f"You are now logged in as {username}.")
+				return redirect("home")
+			else:
+				messages.error(request,"Invalid username or password.")
+		else:
+			messages.error(request,"Invalid username or password.")
+	form = AuthenticationForm()
+	return render(request=request, template_name="accounts/login.html", context={"login_form":form})
  
 @login_required
 def user_logout(request):

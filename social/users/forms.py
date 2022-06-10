@@ -1,3 +1,4 @@
+from xml.etree.ElementTree import Comment
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -5,17 +6,19 @@ from django import forms
 
 from .models import Image, Profile
 
-class CreateUserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
-        
-        def save(self,commit:True):
-            user=super(CreateUserForm,self).save(commit=False)
-            
-            if commit:
-                user.save()
-            return user
+class NewUserForm(UserCreationForm):
+	email = forms.EmailField(required=True)
+
+	class Meta:
+		model = User
+		fields = ("username", "email", "password1", "password2")
+
+	def save(self, commit=True):
+		user = super(NewUserForm, self).save(commit=False)
+		user.email = self.cleaned_data['email']
+		if commit:
+			user.save()
+		return user
         
 class Loginform(forms.Form):
     username = forms.CharField(max_length=50)
@@ -31,9 +34,7 @@ class ImageForm(ModelForm):
     class Meta:
         model = Image
         fields = ['images','image_name','image_caption']
-        widgets = {
-            'tags': forms.CheckboxSelectMultiple(),
-        }
+       
      
         
 class UserUpdateForm(forms.ModelForm):
@@ -41,3 +42,9 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username','email']
+        
+# class CommentForm(forms.ModelForm):
+    
+#     class Meta:
+#         model = Comment
+#         fields = ['user', 'comment']
