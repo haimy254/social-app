@@ -75,7 +75,7 @@ def home_view(request):
 
 def profile_view(request):
     if request.method=="GET":
-        profile=Profile.objects.filter();
+        profile=Profile.objects.all();
        
       
     return render(request,'profile.html',{'profile':profile,})
@@ -96,7 +96,7 @@ def image_view(request):
         if form.is_valid():
             form.instance.user = request.user
             form.save()
-            return redirect('home')
+            return redirect('all_images')
     else:
         form = ImageUploadForm()
     return render(request, 'imageform.html', {'form' : form})

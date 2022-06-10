@@ -25,8 +25,8 @@ background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244
 }
 
 .p-4{
-    background-color: antiquewhite;
-    color: #0a0908;
+    background-color:black;
+    color: white;
 }
 
 .bg {
@@ -49,4 +49,5 @@ background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244
 
 .container py-5{
 background-color: #81b29a;
+
 }

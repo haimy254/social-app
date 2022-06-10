@@ -85,27 +85,27 @@
 {% if user.is_authenticated %}
   <h1 class="all">All images</h1>
 {%endif%}
-<a
+
+
+<div class="container">
+  <div class="card">
+    <img src="{{images.image.url}}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <p class="card-text">
+        <span class="bio">Caption:</span> {{images.caption}}
+      </p>
+      <a
             href="{% url 'home'%}delete_image/{{image.id}}"
             class="btn btn-danger"
             >delete</a
           >
-   <p> goood
-        {% for image in images %}
-  
-        <img src="{{user_img.url}}" alt="Image" class="img-fluid">
-        {% comment %} <h2 class="font-size-regular"><a href="#">{{image.image_name}}</a></h2> {% endcomment %}
-        <h3>{{user_caption}}</h3>
-        {% if user.is_authenticated %}
-        <p>{{user_name}}</p>
-        {% else %}
-        <p>Register/Login to know more</p>
-        {% endif %}
-        {% endfor %}
-    </p> 
+    </div>
+  </div>
+</div>
     </div> 
     </div>
 
+</div>
 </div>
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
