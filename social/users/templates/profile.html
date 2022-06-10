@@ -6,13 +6,13 @@
     <h3>{{ user.username}}</h3>
     <div class="col-md-4">
       <img
-        src="{{ user.profile_photo.url }}"
+        src="{{profie.avatar.url }}"
         class="img-responsive"
         style="width: 100%; float: left; margin-right: 10px"
       />
       {{ profile.bio }}
     </div>
-    <p>{{ user.email}}</p>
+    {% comment %} <a href="{{ user.profile_photo}}"></a> {% endcomment %}
     <form action="" method="POST">
     {% csrf_token%}
     {{ u_form|crispy }}

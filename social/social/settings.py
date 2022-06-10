@@ -77,15 +77,15 @@ WSGI_APPLICATION = 'social.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'deq8q8h64937p',
-         'USER': 'fyyesflcxpcsul',
-        'PASSWORD': 'ea76cfaf9d16380cb6cbbb1bc77a05b580ba7a57facc2be7e7919a4edb4003eb',
-        'HOST' : 'ec2-52-204-195-41.compute-1.amazonaws.com',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'deq8q8h64937p',
+#          'USER': 'fyyesflcxpcsul',
+#         'PASSWORD': 'ea76cfaf9d16380cb6cbbb1bc77a05b580ba7a57facc2be7e7919a4edb4003eb',
+#         'HOST' : 'ec2-52-204-195-41.compute-1.amazonaws.com',
+#     }
+# }
 
 DATABASES = {
     'default': {

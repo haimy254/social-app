@@ -24,13 +24,16 @@ class Loginform(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(max_length=20, widget=forms.PasswordInput)
         
-class ProfileUpdateForm(forms.ModelForm):
+class UpdateProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+
     class Meta:
         model = Profile
-        fields = ['profile_photo','bio']
+        fields = ['avatar','bio']
         templates = ('profileform.html')
         
-class ImageForm(ModelForm):
+class ImageUploadForm(ModelForm):
     class Meta:
         model = Image
         fields = ['images','image_name','image_caption']

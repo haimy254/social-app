@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import ImageUploadForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import Profile
@@ -56,20 +56,19 @@ def home(request):
 @login_required(login_url='accounts/login')
 def profile(request):
     if request.method == 'POST':
-        u_form= UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
-        
-        if u_form.is_valid()and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-    
-    context = {'u_form':u_form,
-               'p_form':p_form}
-    return render (request,'profile.html',context)
+        user_form = NewUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='profile')
+    # else:
+    #     user_form = NewUserForm(instance=request.user)
+    #     profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'profile.html',  )
     
 def home_view(request):
     return render(request,'home.html')
@@ -92,13 +91,14 @@ def display_images(request):
 @login_required(login_url='accounts/login.html')   
 def image_view(request):
     if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
+        form = ImageUploadForm(request.POST, request.FILES)
   
         if form.is_valid():
+            form.instance.user = request.user
             form.save()
             return redirect('home')
     else:
-        form = ImageForm()
+        form = ImageUploadForm()
     return render(request, 'imageform.html', {'form' : form})
   
 def success(request):
