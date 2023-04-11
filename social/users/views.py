@@ -49,7 +49,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('home'))  
 
         
-@login_required(login_url='accounts/login')
+# @login_required(login_url='accounts/login')
 def home(request):
     return render (request,'home')
 
