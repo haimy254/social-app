@@ -21,7 +21,7 @@ def register_request(request):
 			return redirect("home")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
-	return render (request=request, template_name="home.html", context={"register_form":form})
+	return render (request=request, template_name="accounts/register.html", context={"register_form":form})
 
 
         
@@ -41,7 +41,7 @@ def login_request(request):
 		else:
 			messages.error(request,"Invalid username or password.")
 	form = AuthenticationForm()
-	return render(request=request, template_name="accounts/login.html", context={"login_form":form})
+	return render(request=request, template_name="home.html", context={"login_form":form})
  
 @login_required
 def user_logout(request):
@@ -49,7 +49,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('home'))  
 
         
-# @login_required(login_url='accounts/login')
+@login_required(login_url='accounts/login')
 def home(request):
     return render (request,'home')
 
