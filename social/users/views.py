@@ -41,7 +41,7 @@ def login_request(request):
 		else:
 			messages.error(request,"Invalid username or password.")
 	form = AuthenticationForm()
-	return render(request=request, template_name="home.html", context={"login_form":form})
+	return render(request=request, template_name="account/login.html", context={"login_form":form})
  
 @login_required
 def user_logout(request):

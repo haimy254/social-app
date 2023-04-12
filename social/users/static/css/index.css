@@ -8,15 +8,20 @@ background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 /* background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5)) */
  } 
-.gradient-custom-4 {
+/* .gradient-custom-4 { */
 /* fallback for old browsers */
-background: #84fab0;
+/* background: #84fab0; */
 
 /* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+/* background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1)); */
 
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+/* background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1)) */
+/* } */
+body {
+  height: 100vh;
+  background: linear-gradient(90deg,#e52e71,#ff8a00);
+
 }
 
 .p-3{
@@ -29,15 +34,42 @@ background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244
     color: white;
 }
 
-.bg {
-  background-image: url("gold.jpg");
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.bg::before {
+  position: absolute;
+  content: "";
+  left: 30%;
+  top: 20%;
+  width: 450px;
+  height: 450px;
+  background: #17141d;
+  border-radius: 62% 47% 82% 35% / 45% 45% 80% 66%;
+  will-change: border-radius, transform, opacity;
+  animation: sliderShape 5s linear infinite;
+  display: block;
+  z-index: -1;
+  -webkit-animation: sliderShape 5s linear infinite;
+}
+@keyframes sliderShape{
+  0%,100%{
+  border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    transform: translate3d(0,0,0) rotateZ(0.01deg);
+  }
+  34%{
+      border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+    transform:  translate3d(0,5px,0) rotateZ(0.01deg);
+  }
+  50%{
+    transform: translate3d(0,0,0) rotateZ(0.01deg);
+  }
+  67%{
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60% ;
+    transform: translate3d(0,-3px,0) rotateZ(0.01deg);
+  }
 }
 
+
+
+Resources
 .social{
  background-image: url("social.jpg");
   width: 90%;

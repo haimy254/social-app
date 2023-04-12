@@ -9,7 +9,7 @@ your image is submitted Successfully
 {% else %}
    <form method = "post" enctype="multipart/form-data" class="bg-light">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% comment %} {{ form.as_p }} {% endcomment %}
         <button type="submit">Upload</button>
     </form>
 {%endif%}
