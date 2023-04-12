@@ -24,7 +24,7 @@ body {
 
 }
 
-.p-3{
+/* .p-3{
     background-color: #0a0908;
     color: #0a0908;
 }
@@ -32,9 +32,9 @@ body {
 .p-4{
     background-color:black;
     color: white;
-}
+} */
 
-.bg::before {
+.p-3::before {
   position: absolute;
   content: "";
   left: 30%;
