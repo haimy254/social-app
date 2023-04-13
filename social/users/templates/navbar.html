@@ -13,12 +13,12 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="{% url 'home' %}"
+      <a class="nav-item nav-link active" href="{% url 'all_images' %}"
         >Home <span class="sr-only">(current)</span></a
       >
-      <a class="nav-item nav-link" href="{% url 'all_images'%}">All Images</a>
+      {% comment %} <a class="nav-item nav-link" href="{% url 'all_images'%}">All Images</a> {% endcomment %}
       <a class="nav-item nav-link" href="{% url 'imageform'%}"> ADD IMAGE</a>
-      <a class="nav-item nav-link" href="{% url 'profile'%}"> VIEWS PROFILE</a>
+      <a class="nav-item nav-link" href="{% url 'profile'%}"> VIEW PROFILE</a>
       <a class="nav-item nav-link" href="{% url 'user_logout' %}"> LOGOUT</a>
     </div>
      {% if user.is_authenticated %}

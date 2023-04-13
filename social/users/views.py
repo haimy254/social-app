@@ -18,7 +18,7 @@ def register_request(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("home")
+			return redirect("login")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render (request=request, template_name="accounts/register.html", context={"register_form":form})
@@ -35,13 +35,13 @@ def login_request(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request, f"You are now logged in as {username}.")
-				return redirect("login")
+				return redirect("all_images")
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
 			messages.error(request,"Invalid username or password.")
 	form = AuthenticationForm()
-	return render(request=request, template_name="show_images.html", context={"login_form":form})
+	return render(request=request, template_name="accounts/login.html", context={"login_form":form})
  
 @login_required
 def user_logout(request):
@@ -63,12 +63,12 @@ def profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='profile')
-    # else:
-    #     user_form = NewUserForm(instance=request.user)
-    #     profile_form = UpdateProfileForm(instance=request.user.profile)
+            return redirect(to='profileform')
+    else:
+        user_form = NewUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'profile.html',  )
+    return render(request, 'profile.html' )
     
 def home_view(request):
     return render(request,'home.html')
@@ -78,7 +78,7 @@ def profile_view(request):
         profile=Profile.objects.all();
        
       
-    return render(request,'profile.html',{'profile':profile,})
+    return render(request,'profile.html',{'profile':profile})
     
 @login_required(login_url='accounts/login')
 def display_images(request):

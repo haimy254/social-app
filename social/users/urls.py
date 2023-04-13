@@ -13,7 +13,7 @@ urlpatterns = [
     path('profile/',profile_view,name="profile"),
     path('show_images/',display_images,name='all_images'),
     path("search/",search, name="search"),
-    path('profileform/',profile,name="profilefrom"),
+    path('profileform/',profile,name="profileform"),
     path('success', success, name = 'success'),
     path('delete_image/<int:image_id>',delete_image,name='delete_image'),
 ]

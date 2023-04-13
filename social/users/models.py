@@ -13,13 +13,13 @@ class Profile(models.Model):
     def save(self):
         super().save()
 
-        img = Image.open(self.image.path) # Open image
+        # img = Image.open(self.image.path) # Open image
         
-        # resize image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size) # Resize image
-            img.save(self.image.path) # Save it again and override the larger image
+        # # resize image
+        # if img.height > 300 or img.width > 300:
+        #     output_size = (300, 300)
+        #     img.thumbnail(output_size) # Resize image
+        #     img.save(self.image.path) # Save it again and override the larger image
     
 class Comment(models.Model):
     comment = models.CharField(max_length=800, default='')
