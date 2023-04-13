@@ -2,11 +2,12 @@
 
 <!--Login-->
 <div class="container">
-  <div class="jumbotron">
+  <div class="hero-log">
     <h1>Login</h1>
     <form method="POST">
       {% csrf_token %} {{ login_form|crispy }}
       <button class="btn btn-primary" type="submit">Login</button>
+      <p>Do you have an account? If <i>NO</i> <b><a class="nav-item nav-link" href="{% url 'register'%}">Register here</a></b></p>
     </form>
   </div>
 </div>
