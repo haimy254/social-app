@@ -1,19 +1,10 @@
-{%extends 'base.html'%} {% block content %}
+{%extends 'base.html'%}
+ {% block content %}
+ {% load crispy_forms_tags %}
 {% include 'navbar.html'%}
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  <label for="formFileMultiple" class="form-label"
-    >Multiple files input example</label
-  >
-  <input class="form-control" type="file"  multiple />
-  <div class="form-group">
-    <label for="">BIO</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="bio"
-    />
-  </div>
+  {{ profile_form|crispy }}
   <button type="submit">Upload</button>
 </form>
 {% endblock %}

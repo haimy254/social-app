@@ -131,7 +131,7 @@ def post_update(request,image_id):
 @csrf_exempt
 def search(request):   
     if request.method=='POST':
-        search_term = request.POST.get("category")
+        search_term = request.POST.get("image_name")
        
         image_found_by_name=Image.objects.get(image_name=search_term)
         
@@ -164,19 +164,3 @@ def delete_image(request,image_id):
         images=Image.objects.all()
         return render(request,'show_images.html',{'all_images':images})
     
-# @login_required(login_url='accounts/login.html')   
-# def add_image(request):
-#     context = {
-#         "form": ImageUploadForm
-#     }
-
-#     if request.method == 'POST':
-#         form = ImageUploadForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.error(request, "Product was added successfully")
-#             return redirect('all_images')
-#         else:
-#             print(form.errors)
-#             messages.error(request, "Fail! Please check form for errors.")
-#     return render(request, 'imageform.html', context)

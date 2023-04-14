@@ -14,13 +14,7 @@
       />
      <p> {{ profile.bio }}</p>
     </div>
-    {% comment %} <a href="{{ user.profile_avatar}}"></a> {% endcomment %}
-    <form action="" method="POST">
-    {% csrf_token%}
-    {% comment %} {{ u_form|crispy }} {% endcomment %}
-    {% comment %} {{ p_form|crispy }} {% endcomment %}
-    </form>
-    <button type="submit" class="btn btn-success" >Update Profile</button>
+    <a href="{% url 'profileform'%}" class="btn btn-success">Update Profile</a>
     {% endfor %}
   </div>
 </div>
