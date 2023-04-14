@@ -83,23 +83,23 @@ def profile_view(request):
 @login_required(login_url='accounts/login')
 def display_images(request):
     if request.method=="GET":
-        Images=Image.objects.all();
+        images=Image.objects.all();
         absolute_url=request.build_absolute_uri()
       
-        return render(request,'show_images.html',{'all_images':Images,"root_url":absolute_url})
+        return render(request,'show_images.html',{'all_images':images,"root_url":absolute_url})
  
-# @login_required(login_url='accounts/login.html')   
-# def image_view(request):
-#     if request.method == 'POST':
-#         form = ImageUploadForm(request.POST, request.FILES)
+@login_required(login_url='accounts/login.html')   
+def add_image(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
   
-#         if form.is_valid():
-#             form.instance.user = request.user
-#             form.save()
-#             return redirect('all_images')
-#     else:
-#         form = ImageUploadForm()
-#     return render(request, 'imageform.html', {'form' : form})
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            return redirect('all_images')
+    else:
+        form = ImageUploadForm()
+    return render(request, 'imageform.html', {'form' : form})
   
 def success(request):
     return HttpResponse(request,'successfully uploaded')  
@@ -141,19 +141,19 @@ def delete_image(request,image_id):
         images=Image.objects.all()
         return render(request,'show_images.html',{'all_images':images})
     
-@login_required(login_url='accounts/login.html')   
-def add_image(request):
-    context = {
-        "form": ImageUploadForm
-    }
+# @login_required(login_url='accounts/login.html')   
+# def add_image(request):
+#     context = {
+#         "form": ImageUploadForm
+#     }
 
-    if request.method == 'POST':
-        form = ImageUploadForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.error(request, "Product was added successfully")
-            return redirect('all_images')
-        else:
-            print(form.errors)
-            messages.error(request, "Fail! Please check form for errors.")
-    return render(request, 'imageform.html', context)
+#     if request.method == 'POST':
+#         form = ImageUploadForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.error(request, "Product was added successfully")
+#             return redirect('all_images')
+#         else:
+#             print(form.errors)
+#             messages.error(request, "Fail! Please check form for errors.")
+#     return render(request, 'imageform.html', context)
