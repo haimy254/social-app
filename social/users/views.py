@@ -105,6 +105,29 @@ def success(request):
     return HttpResponse(request,'successfully uploaded')  
 
 
+def get_update(request,image_id):
+    the_id=int(image_id)
+    
+    try:
+        image_sel=Image.objects.get(id=the_id)
+        return render(request,'update_form.html',{'selected_image':image_sel})
+    except:
+        images=Image.objects.all()
+        return render(request,'show_images.html',{'all_images':images})
+    
+def post_update(request,image_id):
+    image_id= int(image_id)
+    
+    try:
+        image_sel=Image.objects.post(id =image_id)
+        image=Image(request.POST or None, instance=image_sel)
+        if image.is_valid():
+            image.save()
+        return redirect('show_images.html',{'all_images':image})
+    except Image.DoesNotExist:
+        images=Image.objects.all()
+        return redirect ('show_images.html',{'all_images':images})
+    
 @csrf_exempt
 def search(request):   
     if request.method=='POST':

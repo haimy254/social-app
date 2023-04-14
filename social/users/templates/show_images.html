@@ -26,7 +26,6 @@
     </div>
     {%if all_images %}
       <div class='col-6'>
-        
         <h1 class="all">All images</h1>
         {% for image in all_images%}
         <p><img src="{{image.images.url}}" class="card-img-top" alt="..." /></p>
@@ -36,6 +35,9 @@
         <p class="text">
               <span class="bio">Caption:</span> {{image.image_caption}}
             </p>
+            <a href="{% url 'home'%}update_image/{{image.id}}"
+            class="btn btn-primary"
+            >Update</a>
             <a
             href="{% url 'home'%}delete_image/{{image.id}}"
             class="btn btn-danger"
