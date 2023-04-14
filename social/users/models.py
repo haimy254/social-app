@@ -1,25 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE, blank=True)
-    avatar= models.ImageField(upload_to='profile/')
+    avatar= models.ImageField(upload_to='profile_avators', default='')
     bio = models.CharField(max_length=800)
     
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
     
-    def save(self):
-        super().save()
+    def save_profile(self,*args, **kwargs):
+        super().save(*args, **kwargs)
 
-        # img = Image.open(self.image.path) # Open image
-        
-        # # resize image
-        # if img.height > 300 or img.width > 300:
-        #     output_size = (300, 300)
-        #     img.thumbnail(output_size) # Resize image
-        #     img.save(self.image.path) # Save it again and override the larger image
+         # # resize image
+        img = Image.open(self.avatar.path) # Open image
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.avatar.path) # Save it again and override the larger image
     
 class Comment(models.Model):
     comment = models.CharField(max_length=800, default='')

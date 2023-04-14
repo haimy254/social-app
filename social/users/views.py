@@ -142,7 +142,7 @@ def delete_image(request,image_id):
         return render(request,'show_images.html',{'all_images':images})
     
 @login_required(login_url='accounts/login.html')   
-def image_view(request):
+def add_image(request):
     context = {
         "form": ImageUploadForm
     }

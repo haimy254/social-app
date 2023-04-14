@@ -13,13 +13,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="{% url 'all_images' %}"
+      {% if request.user.is_authenticated %}
+        <a class="nav-item nav-link active" href="{% url 'all_images' %}"
         >Home <span class="sr-only">(current)</span></a
-      >
+        >
       {% comment %} <a class="nav-item nav-link" href="{% url 'all_images'%}">All Images</a> {% endcomment %}
-      <a class="nav-item nav-link" href="{% url 'imageform'%}"> ADD IMAGE</a>
-      <a class="nav-item nav-link" href="{% url 'profile'%}"> VIEW PROFILE</a>
-      <a class="nav-item nav-link" href="{% url 'user_logout' %}"> LOGOUT</a>
+        <a class="nav-item nav-link" href="{% url 'imageform'%}"> ADD IMAGE</a>
+        <a class="nav-item nav-link" href="{% url 'profile'%}"> PROFILE</a>
+        <a class="nav-item nav-link" href="{% url 'user_logout' %}"> LOGOUT</a>
+      {% else %}
+      <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
+      <a href="{% url 'register' %}" class="btn btn-primary">Join Now</a>
+{% endif %}
     </div>
      {% if user.is_authenticated %}
       <a href="#">Hi {{user.username}}</a>
