@@ -1,19 +1,20 @@
 {%extends 'base.html'%} {% block content %}
+{% include 'navbar.html'%}
 <div class="container">
-<div class="jumbotron">
-<center>
-<h1>Add IMAGE</h1>
-<br/><br/>
-{% if submitted %}
-your image is submitted Successfully
-{% else %}
-   <form method = "post" enctype="multipart/form-data" class="bg-light">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Post</button>
-    </form>
-{%endif%}
-</center>
-</div>
+    <div class="jumbotron">
+        <center>
+            <h1>Add IMAGE</h1>
+            <br/>
+            {% if submitted %}
+                your image is submitted Successfully
+            {% else %}
+            <form method = "post" enctype="multipart/form-data" class="bg-light">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Post</button>
+            </form>
+            {%endif%}
+        </center>
+    </div>
 </div>
 {% endblock %}
