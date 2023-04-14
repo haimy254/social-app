@@ -18,11 +18,11 @@ background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 /* background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1)) */
 /* } */
-body {
+/* body {
   height: 100vh;
   background: linear-gradient(90deg,#e52e71,#ff8a00);
 
-}
+} */
 
 /* .p-3{
     background-color: #0a0908;
@@ -38,7 +38,7 @@ body {
   margin: 0;
   height: 100vh;
   font-weight: 100;
-  background: radial-gradient(#a23982,#1f1013);
+  background: radial-gradient(#e52e71,#ff8a00);
   -webkit-overflow-Y: hidden;
   -moz-overflow-Y: hidden;
   -o-overflow-Y: hidden;
