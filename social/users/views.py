@@ -68,7 +68,7 @@ def profile(request):
         user_form = NewUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'profile.html' )
+    return render(request, 'profile.html', context={'profile_form':profile_form} )
     
 def home_view(request):
     return render(request,'home.html')
