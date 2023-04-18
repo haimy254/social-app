@@ -35,7 +35,6 @@ class Image(models.Model):
     images = models.ImageField(upload_to = 'media/',default='')
     image_name= models.CharField(max_length=100)
     image_caption = models.CharField(max_length=500)
-    profile = models.ForeignKey(Profile,on_delete= models.CASCADE)
     modified =models.DateTimeField(auto_now=True)
     comments=models.ManyToManyField('Comment', blank=True)
     likes = models.ManyToManyField(User, related_name='like_image')

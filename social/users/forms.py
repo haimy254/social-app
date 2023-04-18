@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-
+from django.forms import widgets
 from .models import Image, Profile
 
 class NewUserForm(UserCreationForm):
@@ -11,7 +11,13 @@ class NewUserForm(UserCreationForm):
 
 	class Meta:
 		model = User
-		fields = ("username", "email", "password1", "password2")
+		fields = '__all__'
+        widgets =   {
+            "username": widgets.Textarea(attrs={"class": "form-control"}),
+            "email": widgets.Textarea(attrs={"class": "form-control"}),
+            "password1": widgets.Textarea(attrs={"class": "form-control"}),
+            "password2": widgets.Textarea(attrs={"class": "form-control"}),
+        }
 
 	def save(self, commit=True):
 		user = super(NewUserForm, self).save(commit=False)
