@@ -75,7 +75,7 @@ def home_view(request):
 
 def profile_view(request):
     if request.method=="GET":
-        profile=Profile.objects.all();
+        profile=Profile.objects.filter();
        
       
     return render(request,'profile.html',{'profile':profile})

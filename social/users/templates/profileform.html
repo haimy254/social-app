@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
- {% block content %}
- {% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
+{% block content %}
 {% include 'navbar.html'%}
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
