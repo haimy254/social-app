@@ -66,9 +66,9 @@ def profile(request):
             return redirect(to='profileform')
     else:
         user_form = NewUserForm(instance=request.user)
-        profile_form = UpdateProfileForm(instance=request.user.profile)
+        form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'profile.html', context={'profile_form':profile_form} )
+    return render(request, 'profile.html', context={'profile_form':form} )
     
 def home_view(request):
     return render(request,'home.html')
@@ -94,12 +94,13 @@ def add_image(request):
         form = ImageUploadForm(request.POST, request.FILES)
   
         if form.is_valid():
+            form.save(commit=False)
             form.instance.user = request.user
             form.save()
             return redirect('all_images')
     else:
         form = ImageUploadForm()
-    return render(request, 'imageform.html', {'form' : form})
+    return render(request, 'imageform.html', {'image_form' : form})
   
 def success(request):
     return HttpResponse(request,'successfully uploaded')  
