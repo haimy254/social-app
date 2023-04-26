@@ -19,7 +19,7 @@ background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143
 
 body {
   margin: 0;
-  height: 100vh;
+  /* height: 100vh; */
   font-weight: 100;
   background: radial-gradient(#e52e71,#ff8a00);
   -webkit-overflow-Y: hidden;

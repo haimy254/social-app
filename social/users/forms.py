@@ -31,7 +31,7 @@ class ProfileForm(forms.ModelForm):
         fields = ['avatar','bio']
         templates = ('profileform.html')
         
-class ImageUploadForm(ModelForm):
+class ImageForm(ModelForm):
     
     class Meta:
         model = Image

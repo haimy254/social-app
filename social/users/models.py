@@ -9,17 +9,18 @@ class Profile(models.Model):
     bio = models.CharField(max_length=800)
     
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.user.username
+        
     
-    def save_profile(self,*args, **kwargs):
-        super().save(*args, **kwargs)
+    def save_profile(self):
+        self().save()
 
-         # # resize image
-        img = Image.open(self.avatar.path) # Open image
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size) # Resize image
-            img.save(self.avatar.path) # Save it again and override the larger image
+        #  # # resize image
+        # img = Image.open(self.avatar.path) # Open image
+        # if img.height > 300 or img.width > 300:
+        #     output_size = (300, 300)
+        #     img.thumbnail(output_size) # Resize image
+        #     img.save(self.avatar.path) # Save it again and override the larger image
     
 class Comment(models.Model):
     comment = models.CharField(max_length=800, default='')

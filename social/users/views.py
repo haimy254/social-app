@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import ImageUploadForm
+from .forms import *
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import Profile
@@ -69,17 +69,16 @@ def profile_view(request):
 
 @login_required(login_url='accounts/login')
 def profile(request):
+    current_form = request.user
+    profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
     if request.method == 'POST':
-        user_form = NewUserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            return redirect('profileform')
+        if profile_form.is_valid():
+            details = form.save(commit=False)
+            details.user = request.user
+            details.save()
+            return redirect ('home')
     else:
-        user_form = NewUserForm(instance=request.user)
         form = ProfileForm(instance=request.user.profile)
 
     return render(request, 'profile.html', {'profile_form':form} )
@@ -87,7 +86,7 @@ def profile(request):
 def home_view(request):
     return render(request,'home.html')
 
-
+## image section
     
 @login_required(login_url='accounts/login')
 def display_images(request):
@@ -100,15 +99,15 @@ def display_images(request):
 @login_required(login_url='accounts/login.html')   
 def add_image(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
+        form = ImageForm(request.POST)
   
         if form.is_valid():
-            form.save(commit=False)
-            form.instance.user = request.user
+            # form.save(commit=False)
+            # form.instance.user = request.user
             form.save()
             return redirect('all_images')
     else:
-        form = ImageUploadForm()
+        form = ImageForm()
     return render(request, 'imageform.html', {'image_form' : form})
   
 def success(request):
