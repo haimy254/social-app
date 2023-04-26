@@ -389,10 +389,11 @@ background-color: #81b29a;
 
 /* login */
 
-.hero-log{
+#hero-log{
   align-items: center;
-  background-color:white;
+  background-image: linear-gradient(rgba(255,0,0,0), rgb(213, 106, 182));
   align-content: center;
+  border-radius: 2rem;
 }
 
 .title-text{
