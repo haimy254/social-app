@@ -30,4 +30,24 @@
       <a href="#">Hi {{user.username}}</a>
        {% endif %} 
   </div>
+  <form action="{% url 'search'%}" method="POST">
+    <div class="input-group">
+      <div class="form-outline">
+        <input
+          id="search-focus"
+          type="search"
+          id="form1"
+          name="category"
+          class="form-control"
+          placeholder="search..."
+          style="border-radius: 0"
+        />
+         <label
+          class="form-label"
+          for="form1"
+          placeholder="search image by name...."
+        ></label> 
+      </div>
+    </div>
+  </form>
 </nav>

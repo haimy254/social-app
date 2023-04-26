@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% include 'navbar.html'%}
-<form method="post" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {{ profile_form|crispy }}
   <button type="submit">Upload</button>

@@ -53,32 +53,41 @@ def user_logout(request):
 def home(request):
     return render (request,'home')
 
+#profile section 
+
+def profile_view(request):
+    if request.method=="GET":
+        user_form= NewUserForm(instance=request.user)
+        profile_form=ProfileForm(instance=request.user.profile)
+
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form
+        }
+     
+    return render(request,'profile.html',context)
+
 @login_required(login_url='accounts/login')
 def profile(request):
     if request.method == 'POST':
         user_form = NewUserForm(request.POST, instance=request.user)
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='profileform')
+            return redirect('profileform')
     else:
         user_form = NewUserForm(instance=request.user)
-        form = UpdateProfileForm(instance=request.user.profile)
+        form = ProfileForm(instance=request.user.profile)
 
-    return render(request, 'profile.html', context={'profile_form':form} )
+    return render(request, 'profile.html', {'profile_form':form} )
     
 def home_view(request):
     return render(request,'home.html')
 
-def profile_view(request):
-    if request.method=="GET":
-        profile=Profile.objects.filter();
-       
-      
-    return render(request,'profile.html',{'profile':profile})
+
     
 @login_required(login_url='accounts/login')
 def display_images(request):

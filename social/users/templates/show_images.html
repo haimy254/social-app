@@ -3,7 +3,7 @@
 <div class="container">
   <div class='row justify-content-evenly'>
     <div class='col-4'>
-      <form action="{% url 'search'%}" method="POST">
+      {% comment %} <form action="{% url 'search'%}" method="POST">
         <div class="input-group">
           <div class="form-outline">
             <input
@@ -22,7 +22,7 @@
             ></label> 
           </div>
         </div>
-      </form>
+      </form> {% endcomment %}
     </div>
     {%if all_images %}
       <div class='col-6'>
