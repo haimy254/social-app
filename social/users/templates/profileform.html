@@ -1,10 +1,10 @@
 {%extends 'base.html'%}
-{% load crispy_forms_tags %}
 {% block content %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
 {% include 'navbar.html'%}
 <form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ profile_form|crispy }}
+  {{ form }}
   <button type="submit">Upload</button>
 </form>
 {% endblock %}

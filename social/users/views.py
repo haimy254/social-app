@@ -58,11 +58,11 @@ def home(request):
 def profile_view(request):
     if request.method=="GET":
         user_form= NewUserForm(instance=request.user)
-        profile_form=ProfileForm(instance=request.user.profile)
+        form=ProfileForm(instance=request.user.profile)
 
         context = {
             'user_form': user_form,
-            'profile_form': profile_form
+            'form': form
         }
      
     return render(request,'profile.html',context)
@@ -70,18 +70,18 @@ def profile_view(request):
 @login_required(login_url='accounts/login')
 def profile(request):
     current_form = request.user
-    profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+    form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
     if request.method == 'POST':
 
-        if profile_form.is_valid():
+        if form.is_valid():
             details = form.save(commit=False)
             details.user = request.user
             details.save()
-            return redirect ('home')
+            return redirect ('profile')
     else:
         form = ProfileForm(instance=request.user.profile)
 
-    return render(request, 'profile.html', {'profile_form':form} )
+    return render(request, 'profileform.html', {'form':form} )
     
 def home_view(request):
     return render(request,'home.html')
@@ -102,8 +102,8 @@ def add_image(request):
         form = ImageForm(request.POST)
   
         if form.is_valid():
-            # form.save(commit=False)
-            # form.instance.user = request.user
+            form.save(commit=False)
+            form.instance.user = request.user
             form.save()
             return redirect('all_images')
     else:
