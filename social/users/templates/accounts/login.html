@@ -3,7 +3,7 @@
 <!--Login-->
 {% comment %} <div class="container"> {% endcomment %}
   <div class="hero-log">
-    <h1 class='text-center' style='margin-top 5rem'>Login</h1>
+    <h1 class='text-center'>Login</h1>
     <form method="POST" class='text-center'>
       {% csrf_token %} {{ login_form|crispy }}
       <button class="btn btn-warning" type="submit">Login</button>
