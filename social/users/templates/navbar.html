@@ -20,7 +20,7 @@
       {% comment %} <a class="nav-item nav-link" href="{% url 'all_images'%}">All Images</a> {% endcomment %}
         <a class="nav-item nav-link" href="{% url 'imageform'%}"> ADD IMAGE</a>
         <a class="nav-item nav-link" href="{% url 'profile'%}"> PROFILE</a>
-        <a class="nav-item nav-link" href="{% url 'user_logout' %}"> LOGOUT</a>
+        
       {% else %}
       <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
       <a href="{% url 'register' %}" class="btn btn-primary">Join Now</a>
@@ -50,4 +50,5 @@
       </div>
     </div>
   </form>
+  <a class="nav-item nav-link" href="{% url 'user_logout' %}"> LOGOUT</a>
 </nav>
