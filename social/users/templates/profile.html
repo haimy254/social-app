@@ -2,21 +2,20 @@
  {% block content %}
  {% include 'navbar.html'%}
 <div class="container">
-  
-  <div class="jumbotron">
-    <h1>profile</h1>
-    {% for profile in profile%}
+  <center>
+    <h1>Profile</h1>
+    {% for profile in profile %}
     <h3>{{ user.username}}</h3>
     <div class="col-md-4">
-      <img
+      <p>Avator:<img
         src="{{user.profile.avatar }}"
         class="img-responsive"
         style="width: 100%; float: left; margin-right: 10px"
-      />
-     <p> {{ profile.bio }}</p>
+      /></p>
+     <p>Bio: {{ user.profile.bio }}</p>
     </div>
     {% endfor %}
     <a href="{% url 'profileform'%}" class="btn btn-success">Update Profile</a>
-  </div>
+  </center>
 </div>
 {% endblock %}

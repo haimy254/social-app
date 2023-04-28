@@ -389,7 +389,7 @@ background-color: #81b29a;
 
 /* login */
 
-#hero-log{
+.hero-log{
   align-items: center;
   background-image: linear-gradient(rgba(255,0,0,0), rgb(213, 106, 182));
   align-content: center;
@@ -398,4 +398,15 @@ background-color: #81b29a;
 
 .title-text{
   align-content: center;
+}
+
+.container-1{
+display:flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+}
+
+.card{
+  flex-grow: 5;
 }

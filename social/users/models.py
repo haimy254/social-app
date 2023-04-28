@@ -16,11 +16,11 @@ class Profile(models.Model):
         self().save()
 
         #  # # resize image
-        # img = Image.open(self.avatar.path) # Open image
-        # if img.height > 300 or img.width > 300:
-        #     output_size = (300, 300)
-        #     img.thumbnail(output_size) # Resize image
-        #     img.save(self.avatar.path) # Save it again and override the larger image
+        avator = Image.open(self.avatar.path) # Open image
+        if avator.height > 300 or avator.width > 300:
+            output_size = (300, 300)
+            avator.thumbnail(output_size) # Resize image
+            avator.save(self.avatar.path) # Save it again and override the larger image
     
 class Comment(models.Model):
     comment = models.CharField(max_length=800, default='')
@@ -39,6 +39,9 @@ class Image(models.Model):
     modified =models.DateTimeField(auto_now=True)
     comments=models.ManyToManyField('Comment', blank=True)
     likes = models.ManyToManyField(User, related_name='like_image')
+
+    def save_comment(self):
+        self.save
     
     
     @classmethod

@@ -62,7 +62,7 @@ def profile_view(request):
 
         context = {
             'user_form': user_form,
-            'form': form
+            'profile': form
         }
      
     return render(request,'profile.html',context)
@@ -102,8 +102,8 @@ def add_image(request):
         form = ImageForm(request.POST)
   
         if form.is_valid():
-            form.save(commit=False)
-            form.instance.user = request.user
+            # form.save(commit=False)
+            # form.instance.user = request.user
             form.save()
             return redirect('all_images')
     else:
