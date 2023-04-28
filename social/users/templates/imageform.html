@@ -2,9 +2,9 @@
 {% block content %}
 {% load crispy_forms_tags %}
 {% include 'navbar.html'%}
-<div class="container">
-    <div class="jumbotron">
-        <center  class="bg-primary">
+
+    <div class="container">
+        <center  class="hero-log">
             <h1>Add IMAGE</h1>
             <br/>
             {% if submitted %}
@@ -12,11 +12,11 @@
             {% else %}
             <form method = "post" enctype="multipart/form-data" >
                 {% csrf_token %}
-                {{ image_form|crispy }}
+                {{ image_form.as_p }}
                 <button type="submit">Post</button>
             </form>
             {%endif%}
         </center>
     </div>
-</div>
+
 {% endblock %}

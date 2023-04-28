@@ -5,10 +5,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import *
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from .models import Profile
 
 # Create your views here.
 def register_request(request):
@@ -102,8 +100,8 @@ def add_image(request):
         form = ImageForm(request.POST)
   
         if form.is_valid():
-            # form.save(commit=False)
-            # form.instance.user = request.user
+            form.save(commit=False)
+            form.instance.user = request.user
             form.save()
             return redirect('all_images')
     else:
