@@ -397,6 +397,8 @@ background-color: #81b29a;
   border-radius: 2rem;
   width: 50rem;
   height: 30rem;
+  margin-left: 35rem;
+  margin-top: 10rem;
 }
 
 .title-text{
@@ -409,7 +411,4 @@ flex-direction: row;
 justify-content: space-evenly;
 align-items: center;
 }
-
-/* .card{
-  flex-grow: 5;
-} */
+ 
