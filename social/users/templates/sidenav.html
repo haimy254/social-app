@@ -1,0 +1,27 @@
+<div id="mySidenav" class="sidenav">
+    {% if request.user.is_authenticated %}
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{% url 'all_images' %}">Home</a>
+    <a href="#">Services</a>
+    <a href="{% url 'profile'%}">Profile</a>
+    <a href="#">Contact</a>
+    <a href="{% url 'user_logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
+      <a href="{% url 'register' %}" class="btn btn-primary">Join Now</a>
+      {% endif %}   
+</div>
+
+<div class="">
+    {% if user.is_authenticated %}
+      <a href="#">Hello {{user.username}}</a>
+       {% endif %}
+
+  
+  <!-- Use any element to open the sidenav -->
+  <span onclick="openNav()">open</span>
+</div>
+  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+  <div id="main">
+    ...
+</div>
