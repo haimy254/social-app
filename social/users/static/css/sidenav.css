@@ -47,3 +47,7 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+  .auth-nav{
+    font-size: 36px;
+  }
