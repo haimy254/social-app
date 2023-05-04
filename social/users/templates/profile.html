@@ -4,7 +4,7 @@
 <div class="container">
   <center>
     <h1>Profile</h1>
-    {% for profile in profile %}
+    
     <h3>{{ user.username}}</h3>
     <div class="col-md-4">
       <p>Avator:<img
@@ -14,7 +14,7 @@
       /></p>
      <p>Bio: {{ user.profile.bio }}</p>
     </div>
-    {% endfor %}
+   
     <a href="{% url 'profileform'%}" class="btn btn-warning">Update Profile</a>
   </center>
 </div>

@@ -96,13 +96,15 @@ def display_images(request):
  
 @login_required(login_url='accounts/login.html')   
 def add_image(request):
+    current_form = request.user
     form = ImageForm(request.POST,instance=request.user)
     if request.method == 'POST':
   
         if form.is_valid():
-            form.save(commit=False)
-            form.user = request.user
+            # form.save(commit=False)
+            # form.user = request.user
             form.save()
+            print(form)
             return redirect('all_images')
     else:
         form = ImageForm(instance=request.user)
