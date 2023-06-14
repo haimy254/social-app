@@ -93,22 +93,27 @@ def display_images(request):
         absolute_url=request.build_absolute_uri()
       
         return render(request,'show_images.html',{'all_images':images,"root_url":absolute_url})
- 
-@login_required(login_url='accounts/login.html')   
+# import pdb  #### used for checking where the errors are ()
+#         pdb.set_trace()
+
 def add_image(request):
-    current_form = request.user
-    form = ImageForm(request.POST,instance=request.user)
-    if request.method == 'POST':
-  
-        if form.is_valid():
-            # form.save(commit=False)
-            # form.user = request.user
-            form.save()
-            print(form)
-            return redirect('all_images')
+    if request.method =='POST':
+        image_form = ImageForm(request.POST)
+
+        if image_form.is_valid():
+
+            obj = image_form.save(commit=False)
+            obj.user= request.user
+            profile = Profile.objects.get(user=request.user)
+            obj.profile = profile
+            obj.save()
+
+            return redirect('show_images.html') 
     else:
-        form = ImageForm(instance=request.user)
-    return render(request, 'imageform.html', {'image_form' : form})
+        image_form = ImageForm()
+
+    return render(request, 'imageform.html',{'image_form':image_form})
+
   
 def success(request):
     return HttpResponse(request,'successfully uploaded')  
