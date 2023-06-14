@@ -28,7 +28,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['avatar','bio']
+        fields = ['avatar','bio','email']
         templates = ('profileform.html')
         
 class ImageForm(forms.ModelForm):
@@ -37,9 +37,7 @@ class ImageForm(forms.ModelForm):
         model = Image
         fields = ['images','image_name','image_caption']
 
-       
-     
-        
+             
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     class Meta:

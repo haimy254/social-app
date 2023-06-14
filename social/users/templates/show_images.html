@@ -7,7 +7,7 @@
      
       {% comment %} <div class="col-md-4" > {% endcomment %}
         {% for image in all_images%}
-        <div class="card w-40 text-white bg-dark mb-3" style="width: 18rem;">
+        <div class="card  text-white bg-dark " style="width: 18rem;">
           <p><img src="{{image.images.url}}" class="card-img-top" alt="..." /></p>
         
           <div class="card-body">
@@ -22,11 +22,12 @@
                     >delete</a>
           </div>
         </div>
-
+      {% comment %} </div> {% endcomment %}
     {% endfor %}
-  {%else%}
-  <h3 class="text-warning m-3">No Images found</h3>
-{%endif%} 
+    {%else%}
+      <h3 class="text-warning m-3">No Images found</h3>
+    {%endif%} 
+  {% comment %} </div> {% endcomment %}
 </div>
 {% endblock%}
 

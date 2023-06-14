@@ -7,6 +7,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE, blank=True)
     avatar= models.ImageField(upload_to='profile_avators', default='')
     bio = models.CharField(max_length=800)
+    email = models.EmailField(max_length= 30,null=True)
+    # number = Phone()
     
     def __str__(self):
         return self.user.username

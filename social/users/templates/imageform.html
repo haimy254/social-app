@@ -1,7 +1,7 @@
 {%extends 'base.html'%} 
 {% block content %}
 {% load crispy_forms_tags %}
-{% include 'sidenav.html'%}
+{% include 'navbar.html'%}
         <center  class="hero-log">
             <h1>Add IMAGE</h1>
             <br/>
@@ -11,7 +11,7 @@
             <form method = "post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {{ image_form.as_p }}
-                <button type="submit">Post</button>
+                <button type="submit" id='button'>Post</button>
             </form>
             {%endif%}
         </center>
