@@ -99,6 +99,7 @@ def display_images(request):
 def add_image(request):
     if request.method =='POST':
         image_form = ImageForm(request.POST)
+        user_form= NewUserForm(instance=request.user)
 
         if image_form.is_valid():
 

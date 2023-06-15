@@ -412,5 +412,9 @@ justify-content: space-evenly;
 align-items: center;
 }
 
+#hero-profile{
+background-image: linear-gradient(rgba(255,0,0,0), rgb(42, 216, 181));
+border-radius:2rem;
+}
 
  
