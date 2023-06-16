@@ -417,4 +417,7 @@ background-image: linear-gradient(rgba(255,0,0,0), rgb(42, 216, 181));
 border-radius:2rem;
 }
 
+.image{
+  height: 10px;
+}
  

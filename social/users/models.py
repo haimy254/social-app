@@ -56,5 +56,5 @@ class Image(models.Model):
             images =cls.objects.filter(profile__id__icontains=profile).all()
             return images
         
-    def __str__(self):
-        return f'{self.profile.user.username} Post'
+    # def __str__(self):
+    #     return f'{self.profile.user.username} Post'

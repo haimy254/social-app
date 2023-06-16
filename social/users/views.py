@@ -97,19 +97,17 @@ def display_images(request):
 #         pdb.set_trace()
 
 def add_image(request):
-    if request.method =='POST':
-        image_form = ImageForm(request.POST)
-        user_form= NewUserForm(instance=request.user)
-
+    if request.method=='POST':
+        image_form = ImageForm(request.POST, request.FILES,) 
+        
         if image_form.is_valid():
-
             obj = image_form.save(commit=False)
-            obj.user= request.user
-            profile = Profile.objects.get(user=request.user)
+            
+            obj.user=request.user
+            profile = Profile.object.get(user=request.user)
             obj.profile = profile
             obj.save()
-
-            return redirect('show_images.html') 
+            return redirect('show_image')
     else:
         image_form = ImageForm()
 
