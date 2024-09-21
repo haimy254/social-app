@@ -1,4 +1,5 @@
 from django.test import TestCase
+import unittest
 from .models import Profile,Image
 # Create your tests here.
 class ProfileTestClass(TestCase):
@@ -32,3 +33,22 @@ class ImageTestClass(TestCase):
         self.post.save()
         post = Image.get_image()
         self.assertTrue(len(post)>0)        
+
+class RegisterTestClass(unittest.TestCase):
+    '''test for register class'''
+
+    def __init__(self, methodName: str = "runTest") -> None:
+        super().__init__(methodName)
+
+    def test_if_can_register_profile(self):
+        self.client.post('/users/register/', {
+        'username': 'test1',
+        # 'city': 'pavlodar',
+        # 'phone': 87055551122,
+        'password': 'Mypassword777',
+        'password confirmation': 'Mypassword777'
+    })
+        self.assertTrue(Profile.objects.filter(user__username='test1').exists())
+
+if __name__ == '__main__':
+    unittest.main()
