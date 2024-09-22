@@ -16,7 +16,7 @@ def register_request(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("login")
+			return redirect("accounts/login.html")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render (request,"accounts/register.html", context={"register_form":form})
