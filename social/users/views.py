@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
+# import pdb
 
 # Create your views here.
 def register_request(request):
@@ -107,6 +108,7 @@ def add_image(request):
             profile = Profile.object.get(user=request.user)
             obj.profile = profile
             obj.save()
+            # pdb.set_trace()
             return redirect('show_image')
     else:
         image_form = ImageForm()
