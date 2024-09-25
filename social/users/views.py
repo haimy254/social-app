@@ -99,7 +99,7 @@ def display_images(request):
 
 def add_image(request):
     if request.method=='POST':
-        image_form = ImageForm(request.POST, request.FILES,) 
+        image_form = ImageForm(request.POST) 
         
         if image_form.is_valid():
             obj = image_form.save(commit=False)
