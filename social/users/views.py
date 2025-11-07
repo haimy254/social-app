@@ -96,24 +96,22 @@ def display_images(request):
         return render(request,'show_images.html',{'all_images':images,"root_url":absolute_url})
 # import pdb  #### used for checking where the errors are ()
 #         pdb.set_trace()
-
+@login_required
 def add_image(request):
-    if request.method=='POST':
-        image_form = ImageForm(request.POST) 
+    if request.method == 'POST':
+        image_form = ImageForm(request.POST, request.FILES)
         
         if image_form.is_valid():
             obj = image_form.save(commit=False)
-            
-            obj.user=request.user
-            profile = Profile.object.get(user=request.user)
+            obj.user = request.user
+            profile = Profile.objects.get(user=request.user)
             obj.profile = profile
             obj.save()
-            # pdb.set_trace()
             return redirect('show_image')
     else:
         image_form = ImageForm()
 
-    return render(request, 'imageform.html',{'image_form':image_form})
+    return render(request, 'imageform.html', {'image_form': image_form})
 
   
 def success(request):
@@ -178,4 +176,4 @@ def delete_image(request,image_id):
     except:
         images=Image.objects.all()
         return render(request,'show_images.html',{'all_images':images})
-    
+
