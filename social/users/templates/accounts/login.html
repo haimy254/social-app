@@ -1,14 +1,18 @@
-{% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
 
-<!--Login-->
-{% comment %} <div class="container"> {% endcomment %}
-  <div class="hero-log">
-    <h1 class='text-center'>Login</h1>
-    <form method="POST" class='text-center'>
-      {% csrf_token %} {{ login_form|crispy }}
-      <button class="btn btn-warning" type="submit">Login</button>
-      <p><b>Do you have an account?  </b><a class="nav-item nav-link" href="{% url 'register'%}">Register here</a></p>
-    </form>
-  </div>
-{% comment %} </div> {% endcomment %}
+<!-- Login -->
+<div class="hero-log">
+  <h1 class="text-center">Login</h1>
+  <form method="POST" action="" class="text-center" autocomplete="on">
+    {% csrf_token %}
+    {{ login_form|crispy }}
+    <button class="btn btn-warning" type="submit">Login</button>
+    <p><b>Do you have an account? </b>
+      <a class="nav-item nav-link" href="{% url 'register' %}">Register here</a>
+    </p>
+  </form>
+</div>
+
 {% endblock %}

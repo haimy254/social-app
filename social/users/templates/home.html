@@ -1,23 +1,24 @@
-{% extends 'base.html'%}
- {% block content %}
- {% load static %}
+{% extends 'base.html'%} {% block content %} {% load static %}
 <div class="felx-container">
-    <div class="hero-img">
-        <img
-        src="{% static 'css/phone-removebg-preview.png' %}"
-        alt=""
-        height="350px"
-        width="400px"
-    
-      />
-    </div>
-    <!-- <div class=" hero-hd"> -->
-        <p id='head1' class='header'>Designs</p>
-        <p id='head2' class='header'>Just</p>
-        <p id='head3' class='header'>For you</p>
-        <p id='head4' class='header'>simple and awesome</p>
-        <p id='head5' class='header'>Social App</p>
-        <button><a class="nav-item nav-link" href="{% url 'login'%}">LOGIN</a></button>
-    <!-- </div> -->
+  {% comment %}
+  <div class="hero-img">
+    <img
+      src="{% static 'css/phone-removebg-preview.png' %}"
+      alt=""
+      height="350px"
+      width="400px"
+    />
+  </div>
+  {% endcomment %}
+  <!-- <div class=" hero-hd"> -->
+  <p id="head1" class="header">Designs</p>
+  <p id="head2" class="header">Just</p>
+  <p id="head3" class="header">For you</p>
+  <p id="head4" class="header">simple and awesome</p>
+  <p id="head5" class="header">Social App</p>
+  <button>
+    <a class="nav-item nav-link" href="{% url 'login'%}">LOGIN</a>
+  </button>
+  <!-- </div> -->
 </div>
 {% endblock %}
